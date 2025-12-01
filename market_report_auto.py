@@ -91,13 +91,13 @@ def collect_all():
         p = fetch_yf_price(t)
         if p is not None:
             # Correct units for futures:
-# KC=F (Arabica) is quoted in cents per pound (¢/lb)
-if t == 'KC=F':
-    unit = '¢/lb'
-elif t in ('ZC=F', 'ZS=F'):
-    unit = 'USD/bushel'
-else:
-    unit = 'USD/tonne'
+            # KC=F (Arabica) is quoted in cents per pound (¢/lb)
+            if t == 'KC=F':
+                unit = '¢/lb'
+            elif t in ('ZC=F', 'ZS=F'):
+                unit = 'USD/bushel'
+            else:
+                unit = 'USD/tonne'
             data[name] = {'instrument':t,'price':p,'unit':unit,'source':'yfinance'}
     te_map = {'Robusta':'robusta','Vanilla Natural':'vanilla','Dry Beans':'dry-beans','Onions':'onions','Pineapples':'pineapples','Bananas':'bananas'}
     for name,slug in te_map.items():
